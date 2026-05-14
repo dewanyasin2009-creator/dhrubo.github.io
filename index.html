@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dhrubo — Graphic Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --serif: 'DM Serif Display', serif;
+      --sans: 'DM Sans', sans-serif;
+      --bg: #fafaf8;
+      --surface: #f2f1ed;
+      --border: #e2e0d8;
+      --text: #1a1916;
+      --muted: #6b6860;
+      --hint: #b0ae a6;
+      --accent: #2a2a2a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(250,250,248,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .nav-logo { font-family: var(--serif); font-size: 1.2rem; letter-spacing: -0.01em; text-decoration: none; color: var(--text); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* SECTIONS */
+    section { padding: 6rem 4rem; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); font-weight: 500; margin-bottom: 2.5rem;
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; padding-top: 8rem;
+    }
+    .hero-eyebrow { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-bottom: 1.5rem; }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      line-height: 1.0; letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .hero-name em { font-style: italic; color: var(--muted); }
+    .hero-sub { font-size: 1.1rem; color: var(--muted); font-weight: 300; max-width: 500px; line-height: 1.7; }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-top: 2.5rem; font-size: 13px; font-weight: 500;
+      color: var(--text); border: 1px solid var(--border);
+      padding: 12px 24px; border-radius: 100px;
+      text-decoration: none; transition: background 0.2s, border-color 0.2s;
+    }
+    .hero-cta:hover { background: var(--surface); border-color: #c0bdb5; }
+    .scroll-hint { margin-top: 5rem; font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+
+    /* ABOUT */
+    #about { border-top: 0.5px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-headline {
+      font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.2; font-style: italic; color: var(--muted);
+    }
+    .about-headline strong { font-style: normal; color: var(--text); font-weight: 400; }
+    .about-body { font-size: 0.95rem; color: var(--muted); line-height: 1.8; font-weight: 300; }
+    .about-body p + p { margin-top: 1rem; }
+    .skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+    .skill {
+      font-size: 11px; font-weight: 500; padding: 5px 14px;
+      border-radius: 100px; border: 0.5px solid var(--border);
+      color: var(--muted); transition: all 0.2s; cursor: default;
+    }
+    .skill:hover { border-color: #a0a09a; color: var(--text); }
+
+    /* WORK */
+    #work { border-top: 0.5px solid var(--border); }
+    .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 0.5px solid var(--border); }
+    .work-card {
+      background: var(--bg); padding: 2.5rem;
+      cursor: pointer; transition: background 0.2s;
+      text-decoration: none; color: var(--text);
+      display: block; position: relative;
+    }
+    .work-card:hover { background: var(--surface); }
+    .work-num { font-size: 11px; color: var(--muted); font-weight: 500; letter-spacing: 0.06em; margin-bottom: 1.5rem; }
+    .work-title { font-family: var(--serif); font-size: 1.8rem; line-height: 1.1; margin-bottom: 0.8rem; }
+    .work-category { font-size: 12px; color: var(--muted); font-weight: 400; margin-bottom: 0.8rem; }
+    .work-desc { font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; max-width: 320px; }
+    .work-arrow {
+      position: absolute; top: 2.5rem; right: 2.5rem;
+      font-size: 18px; color: var(--muted); transition: transform 0.2s;
+    }
+    .work-card:hover .work-arrow { transform: translate(3px, -3px); color: var(--text); }
+    .work-placeholder {
+      width: 100%; height: 180px; background: var(--surface);
+      border-radius: 6px; margin-bottom: 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; color: var(--muted); letter-spacing: 0.06em;
+    }
+
+    /* CONTACT */
+    #contact { border-top: 0.5px solid var(--border); }
+    .contact-big {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1.05; letter-spacing: -0.02em;
+      font-style: italic; color: var(--muted); max-width: 700px;
+      margin-bottom: 3rem;
+    }
+    .contact-big strong { font-style: normal; color: var(--text); font-weight: 400; }
+    .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .contact-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 500;
+      padding: 12px 22px; border-radius: 100px;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .contact-btn-primary {
+      background: var(--text); color: var(--bg);
+    }
+    .contact-btn-primary:hover { background: #333; }
+    .contact-btn-secondary {
+      border: 1px solid var(--border); color: var(--muted);
+    }
+    .contact-btn-secondary:hover { border-color: #a0a09a; color: var(--text); }
+
+    /* FOOTER */
+    footer {
+      border-top: 0.5px solid var(--border);
+      padding: 2rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 1100px; margin: 0 auto;
+      font-size: 12px; color: var(--muted);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .work-grid { grid-template-columns: 1fr; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">Dhrubo.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">Graphic Designer — Based in Dhaka</p>
+  <h1 class="hero-name">Dhrubo<br><em>Design Studio</em></h1>
+  <p class="hero-sub">Crafting identities, layouts, and visuals that communicate clearly and linger long after first glance.</p>
+  <a class="hero-cta" href="#work">↓ View selected work</a>
+  <p class="scroll-hint">Scroll to explore</p>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">About</p>
+  <div class="about-grid">
+    <div>
+      <p class="about-headline">Design is <strong>thinking</strong> made <em>visible.</em></p>
+    </div>
+    <div class="about-body">
+      <p>I'm a graphic designer with a passion for building visual systems that feel intentional and human. From brand identity to editorial layout and packaging, I work at the intersection of form and meaning.</p>
+      <p>Every project starts with a question: what does this need to communicate, and who does it speak to? The answer shapes everything — color, type, space, and structure.</p>
+      <div class="skills">
+        <span class="skill">Brand Identity</span>
+        <span class="skill">Typography</span>
+        <span class="skill">Print Design</span>
+        <span class="skill">Editorial Layout</span>
+        <span class="skill">Poster Design</span>
+        <span class="skill">Packaging</span>
+        <span class="skill">Visual Systems</span>
+        <span class="skill">Adobe Suite</span>
+        <span class="skill">Figma</span>
+        <span class="skill">Motion Graphics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <p class="section-label">Selected Work</p>
+  <div class="work-grid">
+
+    <a class="work-card" href="#">
+      <div class="work-placeholder">PROJECT IMAGE</div>
+      <p class="work-num">01</p>
+      <span class="work-arrow">↗</span>
+      <p class="work-category">Brand Identity</p>
+      <h2 class="work-title">Bloom Co.</h2>
+      <p class="work-desc">Full visual identity for a sustainable skincare brand — logomark, color palette, and packaging system.</p>
+    </a>
+
+    <a class="work-card" href="#">
+      <div class="work-placeholder">PROJECT IMAGE</div>
+      <p class="work-num">02</p>
+      <span class="work-arrow">↗</span>
+      <p class="work-category">Editorial Design</p>
+      <h2 class="work-title">Epoch Magazine</h2>
+      <p class="work-desc">Art direction and layout design for a quarterly print publication on culture and technology.</p>
+    </a>
+
+    <a class="work-card" href="#">
+      <div class="work-placeholder">PROJECT IMAGE</div>
+      <p class="work-num">03</p>
+      <span class="work-arrow">↗</span>
+      <p class="work-category">Poster Design</p>
+      <h2 class="work-title">Noor Festival</h2>
+      <p class="work-desc">A series of five large-format posters for an international light arts festival in Dhaka.</p>
+    </a>
+
+    <a class="work-card" href="#">
+      <div class="work-placeholder">PROJECT IMAGE</div>
+      <p class="work-num">04</p>
+      <span class="work-arrow">↗</span>
+      <p class="work-category">Packaging</p>
+      <h2 class="work-title">Kora Foods</h2>
+      <p class="work-desc">Packaging redesign for an artisan food brand — typeface selection, texture, and shelf presence.</p>
+    </a>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Contact</p>
+  <p class="contact-big">Let's make something <strong>together.</strong></p>
+  <div class="contact-links">
+    <a class="contact-btn contact-btn-primary" href="mailto:dhrubo@email.com">✉ Send an email</a>
+    <a class="contact-btn contact-btn-secondary" href="https://behance.net/dhrubo" target="_blank">Behance ↗</a>
+    <a class="contact-btn contact-btn-secondary" href="https://instagram.com/dhrubo" target="_blank">Instagram ↗</a>
+    <a class="contact-btn contact-btn-secondary" href="https://linkedin.com/in/dhrubo" target="_blank">LinkedIn ↗</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>Dhrubo — Graphic Designer, Dhaka</span>
+  <span>© 2026</span>
+</footer>
+
+</body>
+</html>
